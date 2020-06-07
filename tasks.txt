@@ -1,0 +1,6 @@
+- Performance. (on adding 2nd layer). [on source-map enabled]
+- Unit path back forward, current unit path to edit.
+- Reposition unit path at any point. Cmd: m
+- Change cmd to n for adding new unit path.
+- Move to git.
+- Bézier curve (cubic and quadratic) support.
