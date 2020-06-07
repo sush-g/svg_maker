@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import { LAYERS__ADD_LAYER, LAYERS__SELECT_LAYER, EDITOR__MOVE_TO, EDITOR__ADD_LINE,
+import { LAYERS__ADD_LAYER, LAYERS__SELECT_LAYER, EDITOR__ADD_NEW_UNIT_PATH, EDITOR__ADD_LINE,
          EDITOR__TOGGLE_ENCLOSURE, EDITOR__REPOSITION_POINT, EDITOR__SET_LAYER_DIMENSIONS,
          LAYERS__SET_STROKE_WIDTH, LAYERS__SET_STROKE, LAYERS__SET_FILL } from '../actions';
 import { reducer } from '../../utils';
@@ -35,7 +35,7 @@ export default reducer(initial_state, {
       selected_layer_obj_idx: payload
     }
   },
-  EDITOR__MOVE_TO: (state, payload) => {
+  EDITOR__ADD_NEW_UNIT_PATH: (state, payload) => {
     let selected = resolve_selected(state);
     selected.addUnitPath();
     return {
