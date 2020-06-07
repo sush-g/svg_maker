@@ -6,6 +6,7 @@ export const CONTROLS__SET_REF_IMAGE_OPACITY = 'CONTROLS__SET_REF_IMAGE_OPACITY'
 
 export const EDITOR__SET_LAYER_DIMENSIONS = 'EDITOR__SET_LAYER_DIMENSIONS';
 export const EDITOR__ADD_NEW_UNIT_PATH = 'EDITOR__ADD_NEW_UNIT_PATH';
+export const EDITOR__SELECT_UNIT_PATH = 'EDITOR__SELECT_UNIT_PATH';
 export const EDITOR__ADD_LINE = 'EDITOR__ADD_LINE';
 export const EDITOR__TOGGLE_ENCLOSURE = 'EDITOR__TOGGLE_ENCLOSURE';
 export const EDITOR__REPOSITION_POINT = 'EDITOR__REPOSITION_POINT';
@@ -41,6 +42,11 @@ export const editor__set_layer_dimensions = (width, height) => ({
 export const editor__add_new_unit_path = (dx=0, dy=0) => ({
   type: EDITOR__ADD_NEW_UNIT_PATH,
   payload: {dx: dx, dy: dy}
+});
+
+export const editor__select_unit_path = pos_delta => ({
+  type: EDITOR__SELECT_UNIT_PATH,
+  payload: pos_delta
 });
 
 export const editor__add_line = (dx, dy) => ({

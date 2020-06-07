@@ -1,7 +1,8 @@
 [x] Move to git.
 [x] Change cmd to n for adding new unit path.
 [ ] Performance. (on adding 2nd layer). [on source-map enabled]
-[ ] Unit path back forward, current unit path to edit.
+[*] Indicate the current path explicitly.
+[x] Unit path back forward, current unit path to edit.
 [ ] Reposition unit path at any point. Cmd: m
 [ ] Bézier curve (cubic and quadratic) support.
 [ ] Highlight multiple layers in edit mode.

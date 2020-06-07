@@ -15,6 +15,10 @@ export const to_opacity_float = (s) => {
   return isNaN(f) ? 0 : f;
 };
 
+export const safe_mod = (num, n) => {
+  return ((num%n)+n)%n;
+}
+
 export const wrap_svg = (svg_inner_jsx, width=100, height=100) => {
   return (<svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>{svg_inner_jsx}</svg>);
 }

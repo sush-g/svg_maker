@@ -1,7 +1,8 @@
 import update from 'immutability-helper';
-import { LAYERS__ADD_LAYER, LAYERS__SELECT_LAYER, EDITOR__ADD_NEW_UNIT_PATH, EDITOR__ADD_LINE,
-         EDITOR__TOGGLE_ENCLOSURE, EDITOR__REPOSITION_POINT, EDITOR__SET_LAYER_DIMENSIONS,
-         LAYERS__SET_STROKE_WIDTH, LAYERS__SET_STROKE, LAYERS__SET_FILL } from '../actions';
+import { LAYERS__ADD_LAYER, LAYERS__SELECT_LAYER, EDITOR__ADD_NEW_UNIT_PATH,
+         EDITOR__SELECT_UNIT_PATH, EDITOR__ADD_LINE, EDITOR__TOGGLE_ENCLOSURE,
+         EDITOR__REPOSITION_POINT, EDITOR__SET_LAYER_DIMENSIONS, LAYERS__SET_STROKE_WIDTH,
+         LAYERS__SET_STROKE, LAYERS__SET_FILL } from '../actions';
 import { reducer } from '../../utils';
 import Layer from '../../core/Layer';
 
@@ -34,6 +35,14 @@ export default reducer(initial_state, {
       ...state,
       selected_layer_obj_idx: payload
     }
+  },
+  EDITOR__SELECT_UNIT_PATH: (state, payload) => {
+    let selected = resolve_selected(state);
+    selected.selectUnitPath(payload);
+    return {
+      ...state,
+      layer_objs: update_selected(state, selected)
+    };
   },
   EDITOR__ADD_NEW_UNIT_PATH: (state, payload) => {
     let selected = resolve_selected(state);

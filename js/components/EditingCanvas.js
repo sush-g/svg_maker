@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { HotKeys, configure as hotkeys_configure } from "react-hotkeys";
 import { to_opacity_float, wrap_svg } from "../utils";
-import { editor__set_layer_dimensions, editor__add_new_unit_path, editor__add_line,
-         editor__toggle_enclosure, editor__reposition_point, editor__delete_element
-       } from '../redux/actions';
+import { editor__set_layer_dimensions, editor__add_new_unit_path, editor__select_unit_path,
+         editor__add_line, editor__toggle_enclosure, editor__reposition_point,
+         editor__delete_element } from '../redux/actions';
 import Layer from '../core/Layer';
 
 hotkeys_configure({
@@ -22,6 +22,8 @@ class EditingCanvas extends Component {
   _getKeyMap() {
     return {
       ADD_NEW_UNIT_PATH: "n",
+      SELECT_PREV_UNIT_PATH: "shift+,",
+      SELECT_NEXT_UNIT_PATH: "shift+.",
       ADD_LINE: "l",
       TOGGLE_ENCLOSURE: "z",
       REPOSITION_UP_SMALL: "up",
@@ -42,6 +44,16 @@ class EditingCanvas extends Component {
         event.preventDefault();
         console.log('ADD_NEW_UNIT_PATH');
         this.props.editor__add_new_unit_path();
+      },
+      SELECT_PREV_UNIT_PATH: event => {
+        event.preventDefault();
+        console.log('SELECT_PREV_UNIT_PATH');
+        this.props.editor__select_unit_path(-1);
+      },
+      SELECT_NEXT_UNIT_PATH: event => {
+        event.preventDefault();
+        console.log('SELECT_NEXT_UNIT_PATH');
+        this.props.editor__select_unit_path(1);
       },
       ADD_LINE: event => {
         event.preventDefault();
@@ -155,6 +167,7 @@ const mapDispatchToProps = {
   editor__set_layer_dimensions,
   editor__reposition_point,
   editor__add_new_unit_path,
+  editor__select_unit_path,
   editor__add_line,
   editor__toggle_enclosure,
   editor__delete_element
