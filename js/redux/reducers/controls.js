@@ -4,7 +4,7 @@ import { reducer } from '../../utils';
 
 const initial_state = {
   mode: MODES.edit,
-  ref_img_src: 'https://i.dlpng.com/static/png/6619362_preview.png',
+  ref_img_src: 'http://2.bp.blogspot.com/-duG2Fz2J_58/UyC8h0nR7vI/AAAAAAAAOjI/o9NgcHHGShg/s1600/kraft_paper_texture_texturise.jpg',
   ref_img_opacity: 0.5
 };
 

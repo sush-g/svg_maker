@@ -98,6 +98,6 @@ export default class Layer {
 
   getGuideCode() {
     const selected_unit_path = this._getSelectedUnitPath();
-    return selected_unit_path && selected_unit_path.render_guide();
+    return selected_unit_path && selected_unit_path.render_guide(this);
   }
 }

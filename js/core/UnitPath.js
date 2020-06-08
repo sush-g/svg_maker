@@ -99,8 +99,24 @@ export default class UnitPath {
     return elements.map(elem => elem.render()).join(' ');
   }
 
-  render_guide() {
-    return (<circle cx={this._starting_cursor.x} cy={this._starting_cursor.y}
-                    r={1} stroke="#000" fill="transparent" />);
+  render_guide(ref_layer) {
+    const radius = 5;
+    const pin_length = 10;
+    const marker_v_delta = pin_length + radius;
+    const terminal_cursor = this.terminal_cursor;
+    const start_clr = "rgb(76,175,80)";
+    const terminal_clr = "rgb(255,87,34)";
+    const pin_clr = "rgba(0,0,0,0.5)";
+    return (<g strokeWidth="1">
+        <circle cx={this._starting_cursor.x} cy={this._starting_cursor.y - marker_v_delta}
+                    r={radius} stroke={pin_clr} fill={start_clr} />
+        <path d={`M ${this._starting_cursor.x} ${this._starting_cursor.y} v ${-pin_length}`}
+              stroke={pin_clr} />
+        <circle cx={terminal_cursor.x} cy={terminal_cursor.y - marker_v_delta}
+                    r={radius} stroke={pin_clr} fill={terminal_clr} />
+        <path d={`M ${terminal_cursor.x} ${terminal_cursor.y} v ${-pin_length}`}
+              stroke={pin_clr} />
+      </g>
+    );
   }
 }
