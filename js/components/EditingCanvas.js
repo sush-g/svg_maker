@@ -5,7 +5,7 @@ import { HotKeys, configure as hotkeys_configure } from "react-hotkeys";
 import { to_opacity_float, wrap_svg } from "../utils";
 import { editor__set_layer_dimensions, editor__add_new_unit_path, editor__select_unit_path,
          editor__add_line, editor__toggle_enclosure, editor__reposition_point,
-         editor__delete_element } from '../redux/actions';
+         editor__reposition_unit_path, editor__delete_element } from '../redux/actions';
 import Layer from '../core/Layer';
 
 hotkeys_configure({
@@ -26,14 +26,10 @@ class EditingCanvas extends Component {
       SELECT_NEXT_UNIT_PATH: "shift+.",
       ADD_LINE: "l",
       TOGGLE_ENCLOSURE: "z",
-      REPOSITION_UP_SMALL: "up",
-      REPOSITION_UP_BIG: "shift+up",
-      REPOSITION_DOWN_SMALL: "down",
-      REPOSITION_DOWN_BIG: "shift+down",
-      REPOSITION_LEFT_SMALL: "left",
-      REPOSITION_LEFT_BIG: "shift+left",
-      REPOSITION_RIGHT_SMALL: "right",
-      REPOSITION_RIGHT_BIG: "shift+right",
+      REPOSITION: ["up", "down", "left", "right",
+                   "alt+up", "alt+down", "alt+left", "alt+right",
+                   "shift+up", "shift+down", "shift+left", "shift+right",
+                   "shift+alt+up", "shift+alt+down", "shift+alt+left", "shift+alt+right"],
       DELETE: ["del", "backspace"]
     };
   }
@@ -65,45 +61,18 @@ class EditingCanvas extends Component {
         console.log('TOGGLE_ENCLOSURE');
         this.props.editor__toggle_enclosure();
       },
-      REPOSITION_UP_SMALL: event => {
+      REPOSITION: event => {
         event.preventDefault();
-        console.log('REPOSITION_UP_SMALL');
-        this.props.editor__reposition_point(0, -1);
-      },
-      REPOSITION_UP_BIG: event => {
-        event.preventDefault();
-        console.log('REPOSITION_UP_BIG');
-        this.props.editor__reposition_point(0, -10);
-      },
-      REPOSITION_DOWN_SMALL: event => {
-        event.preventDefault();
-        console.log('REPOSITION_DOWN_SMALL');
-        this.props.editor__reposition_point(0, 1);
-      },
-      REPOSITION_DOWN_BIG: event => {
-        event.preventDefault();
-        console.log('REPOSITION_DOWN_BIG');
-        this.props.editor__reposition_point(0, 10);
-      },
-      REPOSITION_LEFT_SMALL: event => {
-        event.preventDefault();
-        console.log('REPOSITION_LEFT_SMALL');
-        this.props.editor__reposition_point(-1, 0);
-      },
-      REPOSITION_LEFT_BIG: event => {
-        event.preventDefault();
-        console.log('REPOSITION_LEFT_BIG');
-        this.props.editor__reposition_point(-10, 0);
-      },
-      REPOSITION_RIGHT_SMALL: event => {
-        event.preventDefault();
-        console.log('REPOSITION_RIGHT_SMALL');
-        this.props.editor__reposition_point(1, 0);
-      },
-      REPOSITION_RIGHT_BIG: event => {
-        event.preventDefault();
-        console.log('REPOSITION_RIGHT_BIG');
-        this.props.editor__reposition_point(10, 0);
+        console.log('REPOSITION');
+        let pos_delta = {
+          "ArrowUp": [0, -1],
+          "ArrowDown": [0, 1],
+          "ArrowLeft": [-1, 0],
+          "ArrowRight": [1, 0]
+        }[event.key];
+        pos_delta = event.shiftKey ? pos_delta.map(d => d*10) : pos_delta;
+        event.altKey ? this.props.editor__reposition_unit_path(...pos_delta) :
+                       this.props.editor__reposition_point(...pos_delta);
       },
       DELETE: event => {
         event.preventDefault();
@@ -166,6 +135,7 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = {
   editor__set_layer_dimensions,
   editor__reposition_point,
+  editor__reposition_unit_path,
   editor__add_new_unit_path,
   editor__select_unit_path,
   editor__add_line,

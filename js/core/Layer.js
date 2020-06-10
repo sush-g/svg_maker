@@ -73,9 +73,14 @@ export default class Layer {
     }
   }
 
-  reposition(dx, dy) {
+  repositionTail(dx, dy) {
     const selected_unit_path = this._getSelectedUnitPath();
     selected_unit_path && selected_unit_path.repositionTail(dx, dy);
+  }
+
+  repositionUnitPath(dx, dy) {
+    const selected_unit_path = this._getSelectedUnitPath();
+    selected_unit_path && selected_unit_path.reposition(dx, dy);
   }
 
   deleteElement() {

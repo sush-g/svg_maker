@@ -58,6 +58,11 @@ export default class UnitPath {
     this._updateRelCursor({dx, dy});
   }
 
+  reposition(dx, dy) {
+    this._starting_cursor.x += dx;
+    this._starting_cursor.y += dy;
+  }
+
   repositionTail(dx, dy) {
     const last_element = this._elements[this._elements.length-1];
     if (last_element) {
@@ -65,8 +70,7 @@ export default class UnitPath {
       last_element.dy += dy;
       this._updateRelCursor({dx, dy});
     } else {
-      this._starting_cursor.x += dx;
-      this._starting_cursor.y += dy;
+      this.reposition(dx, dy);
     }
   }
 

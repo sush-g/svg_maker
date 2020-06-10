@@ -10,6 +10,7 @@ export const EDITOR__SELECT_UNIT_PATH = 'EDITOR__SELECT_UNIT_PATH';
 export const EDITOR__ADD_LINE = 'EDITOR__ADD_LINE';
 export const EDITOR__TOGGLE_ENCLOSURE = 'EDITOR__TOGGLE_ENCLOSURE';
 export const EDITOR__REPOSITION_POINT = 'EDITOR__REPOSITION_POINT';
+export const EDITOR__REPOSITION_UNIT_PATH = 'EDITOR__REPOSITION_UNIT_PATH';
 export const EDITOR__DELETE_ELEMENT = 'EDITOR__DELETE_ELEMENT';
 
 export const LAYERS__ADD_LAYER = 'LAYERS__ADD_LAYER';
@@ -66,6 +67,11 @@ export const editor__delete_element = () => ({
 
 export const editor__reposition_point = (dx, dy) => ({
   type: EDITOR__REPOSITION_POINT,
+  payload: {dx: dx, dy: dy}
+});
+
+export const editor__reposition_unit_path = (dx, dy) => ({
+  type: EDITOR__REPOSITION_UNIT_PATH,
   payload: {dx: dx, dy: dy}
 });
 

@@ -1,8 +1,8 @@
 import update from 'immutability-helper';
 import { LAYERS__ADD_LAYER, LAYERS__SELECT_LAYER, EDITOR__ADD_NEW_UNIT_PATH,
          EDITOR__SELECT_UNIT_PATH, EDITOR__ADD_LINE, EDITOR__TOGGLE_ENCLOSURE,
-         EDITOR__REPOSITION_POINT, EDITOR__SET_LAYER_DIMENSIONS, LAYERS__SET_STROKE_WIDTH,
-         LAYERS__SET_STROKE, LAYERS__SET_FILL } from '../actions';
+         EDITOR__REPOSITION_POINT, EDITOR__REPOSITION_UNIT_PATH, EDITOR__SET_LAYER_DIMENSIONS,
+         LAYERS__SET_STROKE_WIDTH, LAYERS__SET_STROKE, LAYERS__SET_FILL } from '../actions';
 import { reducer } from '../../utils';
 import Layer from '../../core/Layer';
 
@@ -72,7 +72,16 @@ export default reducer(initial_state, {
   EDITOR__REPOSITION_POINT: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx, dy} = payload;
-    selected.reposition(dx, dy);
+    selected.repositionTail(dx, dy);
+    return {
+      ...state,
+      layer_objs: update_selected(state, selected)
+    };
+  },
+  EDITOR__REPOSITION_UNIT_PATH: (state, payload) => {
+    let selected = resolve_selected(state);
+    const {dx, dy} = payload;
+    selected.repositionUnitPath(dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
