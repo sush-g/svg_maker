@@ -2,9 +2,20 @@ img {
   max-width: 100%;
 }
 
-.editing-canvas {
+.editing-canvas-wrapper {
   position: relative;
   max-width: 1000px;
+}
+
+.editing-canvas-wrapper .status-bar {
+  text-align: right;
+  font-size: 14px;
+  height: 20px;
+}
+
+.editing-canvas {
+  position: relative;
+  width: 1000px;
 }
 
 .editing-canvas .ref-img-wrapper {
@@ -20,6 +31,10 @@ img {
 .primary-zone {
   position: relative;
   z-index: 1;
+}
+
+.primary-zone .hotkeys {
+  outline: none;
 }
 
 /* Color dropdown */

@@ -203,16 +203,21 @@ class EditingCanvas extends Component {
     const selected_layer_obj = this.props.layer_objs[this.props.selected_layer_obj_idx];
 
     return (
-      <HotKeys keyMap={this._keyMap} handlers={this._keyHandlers}>
-        <div className="editing-canvas">
-          <div className="ref-img-wrapper" style={ref_img_styles}>
-            <img src={this.props.ref_img_src} onLoad={this.handleImgLoad.bind(this)}/>
+      <HotKeys className="hotkeys" keyMap={this._keyMap} handlers={this._keyHandlers}>
+        <div className="editing-canvas-wrapper">
+          <div className="status-bar">
+            {selected_layer_obj ? selected_layer_obj.getLastElementRenderCode(): null}
           </div>
-          <div className="layer-wrapper" style={layer_styles}>
-            {selected_layer_obj ? wrap_svg([
-              selected_layer_obj.getPathCode(),
-              selected_layer_obj.getGuideCode()
-            ], width, height): null}
+          <div className="editing-canvas">
+            <div className="ref-img-wrapper" style={ref_img_styles}>
+              <img src={this.props.ref_img_src} onLoad={this.handleImgLoad.bind(this)}/>
+            </div>
+            <div className="layer-wrapper" style={layer_styles}>
+              {selected_layer_obj ? wrap_svg([
+                selected_layer_obj.getPathCode(),
+                selected_layer_obj.getGuideCode()
+              ], width, height): null}
+            </div>
           </div>
         </div>
       </HotKeys>

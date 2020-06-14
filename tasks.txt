@@ -4,6 +4,9 @@
 [x] Indicate the current path explicitly.
 [x] Reposition unit path at any point.
 [x] Bézier curve (cubic and quadratic) support.
+[x] Render guide for control pts.
+[x] Show element which is currently being edited.
+[*] Colors.
 [ ] Highlight multiple layers in edit mode.
 [ ] Move layers up/down.
 [ ] Delete layers.

@@ -1,6 +1,9 @@
 import React from "react";
-import { MoveTo, Line, Cubic, SmoothCubic, Quadratic, SmoothQuadratic, ClosePath } from './Element';
+import { MovableElement, MoveTo, Line, Cubic, SmoothCubic, Quadratic, SmoothQuadratic, ClosePath,
+         has_first_control_pt, has_second_control_pt } from './Element';
 
+
+const PIN_COLOR = "rgba(0,0,0,0.5)";
 
 export default class UnitPath {
   constructor() {
@@ -132,10 +135,10 @@ export default class UnitPath {
 
   repositionFirstControlPoint(dx, dy) {
     const last_element = this._elements[this._elements.length-1];
-    if (last_element instanceof Cubic || last_element instanceof Quadratic) {
+    if (has_first_control_pt(last_element)) {
       last_element.dx1 += dx;
       last_element.dy1 += dy;
-    } else if (last_element instanceof SmoothCubic) {
+    } else if (!has_first_control_pt(last_element) && has_second_control_pt(last_element)) {
       last_element.dx2 += dx;
       last_element.dy2 += dy;
     }
@@ -143,7 +146,7 @@ export default class UnitPath {
 
   repositionSecondControlPoint(dx, dy) {
     const last_element = this._elements[this._elements.length-1];
-    if (last_element instanceof Cubic || last_element instanceof SmoothCubic) {
+    if (has_second_control_pt(last_element)) {
       last_element.dx2 += dx;
       last_element.dy2 += dy;
     }
@@ -170,6 +173,15 @@ export default class UnitPath {
     }
   }
 
+  getLastElementRenderCode() {
+    const last_element = this._elements[this._elements.length-1];
+    if (last_element) {
+      const abs_start_x = this._starting_cursor.x+last_element.start_x;
+      const abs_start_y = this._starting_cursor.y+last_element.start_y;
+      return `[${abs_start_x}, ${abs_start_y}] ${last_element.render()}`;
+    }
+  }
+
   render() {
     let elements = [this._moveTo(), ...this._elements];
     if (this._enclosed) {
@@ -178,23 +190,73 @@ export default class UnitPath {
     return elements.map(elem => elem.render()).join(' ');
   }
 
+  renderControlPointGuide() {
+    const control_clr = "rgba(255,255,255,0.5)";
+    const control_pt_radius = 3;
+    const last_element = this._elements[this._elements.length-1];
+    let last_element_start_x = null;
+    let last_element_start_y = null;
+    let first_control_pt = null;
+    let second_control_pt = null;
+    let start_line = null;
+    let end_line = null;
+    if (last_element instanceof MovableElement) {
+      last_element_start_x = this._starting_cursor.x + last_element.start_x;
+      last_element_start_y = this._starting_cursor.y + last_element.start_y;
+    }
+    if (has_first_control_pt(last_element)) {
+      first_control_pt = <circle cx={last_element_start_x+last_element.dx1}
+                                 cy={last_element_start_y+last_element.dy1}
+                                 r={control_pt_radius}/>;
+      start_line = <line x1={last_element_start_x}
+                         y1={last_element_start_y}
+                         x2={last_element_start_x+last_element.dx1}
+                         y2={last_element_start_y+last_element.dy1}
+                         stroke-dasharray="4" />;
+    }
+    if (has_second_control_pt(last_element)) {
+      second_control_pt = <circle cx={last_element_start_x+last_element.dx2}
+                                  cy={last_element_start_y+last_element.dy2}
+                                  r={control_pt_radius}/>;
+      end_line = <line x1={last_element_start_x+last_element.dx}
+                       y1={last_element_start_y+last_element.dy}
+                       x2={last_element_start_x+last_element.dx2}
+                       y2={last_element_start_y+last_element.dy2}
+                       stroke-dasharray="4" />;
+    }
+    if (first_control_pt && !second_control_pt) {
+      end_line = <line x1={last_element_start_x+last_element.dx}
+                       y1={last_element_start_y+last_element.dy}
+                       x2={last_element_start_x+last_element.dx1}
+                       y2={last_element_start_y+last_element.dy1}
+                       stroke-dasharray="4" />;
+    }
+    return <g stroke={PIN_COLOR} fill={control_clr}>
+      {first_control_pt}
+      {second_control_pt}
+      {start_line}
+      {end_line}
+    </g>;
+  }
+
   render_guide(ref_layer) {
     const radius = 5;
     const pin_length = 10;
     const marker_v_delta = pin_length + radius;
     const terminal_cursor = this.terminal_cursor;
-    const start_clr = "rgb(76,175,80)";
-    const terminal_clr = "rgb(255,87,34)";
-    const pin_clr = "rgba(0,0,0,0.5)";
+    const start_clr = "rgba(76,175,80,0.5)";
+    const terminal_clr = "rgba(255,87,34,0.5)";
+
     return (<g strokeWidth="1">
         <circle cx={this._starting_cursor.x} cy={this._starting_cursor.y - marker_v_delta}
-                    r={radius} stroke={pin_clr} fill={start_clr} />
+                    r={radius} stroke={PIN_COLOR} fill={start_clr} />
         <path d={`M ${this._starting_cursor.x} ${this._starting_cursor.y} v ${-pin_length}`}
-              stroke={pin_clr} />
+              stroke={PIN_COLOR} />
         <circle cx={terminal_cursor.x} cy={terminal_cursor.y - marker_v_delta}
-                    r={radius} stroke={pin_clr} fill={terminal_clr} />
+                    r={radius} stroke={PIN_COLOR} fill={terminal_clr} />
         <path d={`M ${terminal_cursor.x} ${terminal_cursor.y} v ${-pin_length}`}
-              stroke={pin_clr} />
+              stroke={PIN_COLOR} />
+        {this.renderControlPointGuide()}
       </g>
     );
   }

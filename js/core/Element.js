@@ -279,9 +279,16 @@ export class SmoothQuadratic extends MovableElement {
   }
 }
 
-
 export class ClosePath {
   render() {
     return `z`;
   }
 }
+
+export const has_first_control_pt = (element) => {
+  return element instanceof Quadratic || element instanceof Cubic;
+};
+
+export const has_second_control_pt = (element) => {
+  return element instanceof Cubic || element instanceof SmoothCubic;
+};

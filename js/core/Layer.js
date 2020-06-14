@@ -125,6 +125,11 @@ export default class Layer {
     }
   }
 
+  getLastElementRenderCode() {
+    const selected_unit_path = this._getSelectedUnitPath();
+    return selected_unit_path && selected_unit_path.getLastElementRenderCode();
+  }
+
   getPathCode() {
     let d = this._unit_paths.map(unit_path => unit_path.render()).join(' ');
     return <path d={d} fill={this._fill} stroke={this._stroke}
