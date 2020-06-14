@@ -66,6 +66,26 @@ export default class Layer {
     selected_unit_path && selected_unit_path.addLine(dx, dy);
   }
 
+  addCubic(dx1, dy1, dx2, dy2, dx, dy) {
+    const selected_unit_path = this._getSelectedUnitPath();
+    selected_unit_path && selected_unit_path.addCubic(dx1, dy1, dx2, dy2, dx, dy);
+  }
+
+  addSmoothCubic(dx2, dy2, dx, dy) {
+    const selected_unit_path = this._getSelectedUnitPath();
+    selected_unit_path && selected_unit_path.addSmoothCubic(dx2, dy2, dx, dy);
+  }
+
+  addQuadratic(dx1, dy1, dx, dy) {
+    const selected_unit_path = this._getSelectedUnitPath();
+    selected_unit_path && selected_unit_path.addQuadratic(dx1, dy1, dx, dy);
+  }
+
+  addSmoothQuadratic(dx, dy) {
+    const selected_unit_path = this._getSelectedUnitPath();
+    selected_unit_path && selected_unit_path.addSmoothQuadratic(dx, dy);
+  }
+
   toggleEnclosure() {
     const selected_unit_path = this._getSelectedUnitPath();
     if (selected_unit_path) {
@@ -81,6 +101,16 @@ export default class Layer {
   repositionUnitPath(dx, dy) {
     const selected_unit_path = this._getSelectedUnitPath();
     selected_unit_path && selected_unit_path.reposition(dx, dy);
+  }
+
+  repositionFirstControlPoint(dx, dy) {
+    const selected_unit_path = this._getSelectedUnitPath();
+    selected_unit_path && selected_unit_path.repositionFirstControlPoint(dx, dy);
+  }
+
+  repositionSecondControlPoint(dx, dy) {
+    const selected_unit_path = this._getSelectedUnitPath();
+    selected_unit_path && selected_unit_path.repositionSecondControlPoint(dx, dy);
   }
 
   deleteElement() {

@@ -1,5 +1,5 @@
 import React from "react";
-import { MoveTo, AddLine, ClosePath } from './Element';
+import { MoveTo, Line, Cubic, SmoothCubic, Quadratic, SmoothQuadratic, ClosePath } from './Element';
 
 
 export default class UnitPath {
@@ -53,8 +53,64 @@ export default class UnitPath {
       dx: dx,
       dy: dy
     };
-    const add_line = new AddLine(args);
-    this._elements.push(add_line);
+    const line = new Line(args);
+    this._elements.push(line);
+    this._updateRelCursor({dx, dy});
+  }
+
+  addCubic(dx1, dy1, dx2, dy2, dx, dy) {
+    const args = {
+      start_x: this._rel_cursor.x,
+      start_y: this._rel_cursor.y,
+      dx1: dx1,
+      dy1: dy1,
+      dx2: dx2,
+      dy2: dy2,
+      dx: dx,
+      dy: dy
+    };
+    const cubic = new Cubic(args);
+    this._elements.push(cubic);
+    this._updateRelCursor({dx, dy});
+  }
+
+  addSmoothCubic(dx2, dy2, dx, dy) {
+    const args = {
+      start_x: this._rel_cursor.x,
+      start_y: this._rel_cursor.y,
+      dx2: dx2,
+      dy2: dy2,
+      dx: dx,
+      dy: dy
+    };
+    const smooth_cubic = new SmoothCubic(args);
+    this._elements.push(smooth_cubic);
+    this._updateRelCursor({dx, dy});
+  }
+
+  addQuadratic(dx1, dy1, dx, dy) {
+    const args = {
+      start_x: this._rel_cursor.x,
+      start_y: this._rel_cursor.y,
+      dx1: dx1,
+      dy1: dy1,
+      dx: dx,
+      dy: dy
+    };
+    const quadratic = new Quadratic(args);
+    this._elements.push(quadratic);
+    this._updateRelCursor({dx, dy});
+  }
+
+  addSmoothQuadratic(dx, dy) {
+    const args = {
+      start_x: this._rel_cursor.x,
+      start_y: this._rel_cursor.y,
+      dx: dx,
+      dy: dy
+    };
+    const smooth_quadratic = new SmoothQuadratic(args);
+    this._elements.push(smooth_quadratic);
     this._updateRelCursor({dx, dy});
   }
 
@@ -71,6 +127,25 @@ export default class UnitPath {
       this._updateRelCursor({dx, dy});
     } else {
       this.reposition(dx, dy);
+    }
+  }
+
+  repositionFirstControlPoint(dx, dy) {
+    const last_element = this._elements[this._elements.length-1];
+    if (last_element instanceof Cubic || last_element instanceof Quadratic) {
+      last_element.dx1 += dx;
+      last_element.dy1 += dy;
+    } else if (last_element instanceof SmoothCubic) {
+      last_element.dx2 += dx;
+      last_element.dy2 += dy;
+    }
+  }
+
+  repositionSecondControlPoint(dx, dy) {
+    const last_element = this._elements[this._elements.length-1];
+    if (last_element instanceof Cubic || last_element instanceof SmoothCubic) {
+      last_element.dx2 += dx;
+      last_element.dy2 += dy;
     }
   }
 

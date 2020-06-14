@@ -30,7 +30,7 @@ export class MoveTo extends MovableElement {
   }
 }
 
-export class AddLine extends MovableElement {
+export class Line extends MovableElement {
   constructor({start_x, start_y, dx, dy}) {
     super({start_x, start_y});
     this._dx = dx;
@@ -64,6 +64,221 @@ export class AddLine extends MovableElement {
     };
   }
 }
+
+export class Cubic extends MovableElement {
+  constructor({start_x, start_y, dx1, dy1, dx2, dy2, dx, dy}) {
+    super({start_x, start_y});
+    this._dx1 = dx1;
+    this._dy1 = dy1;
+    this._dx2 = dx2;
+    this._dy2 = dy2;
+    this._dx = dx;
+    this._dy = dy;
+  }
+
+  get dx() {
+    return this._dx;
+  }
+
+  get dy() {
+    return this._dy;
+  }
+
+  get dx1() {
+    return this._dx1;
+  }
+
+  get dy1() {
+    return this._dy1;
+  }
+
+  get dx2() {
+    return this._dx2;
+  }
+
+  get dy2() {
+    return this._dy2;
+  }
+
+  set dx(new_dx) {
+    this._dx = new_dx;
+  }
+
+  set dy(new_dy) {
+    this._dy = new_dy;
+  }
+
+  set dx1(new_dx) {
+    this._dx1 = new_dx;
+  }
+
+  set dy1(new_dy) {
+    this._dy1 = new_dy;
+  }
+
+  set dx2(new_dx) {
+    this._dx2 = new_dx;
+  }
+
+  set dy2(new_dy) {
+    this._dy2 = new_dy;
+  }
+
+  render() {
+    return `c ${this._dx1} ${this._dy1} ${this._dx2} ${this._dy2} ${this._dx} ${this._dy}`;
+  }
+
+  getTerminal() {
+    return {
+      dx: this._dx,
+      dy: this._dy
+    };
+  }
+}
+
+export class SmoothCubic extends MovableElement {
+  constructor({start_x, start_y, dx1, dy1, dx2, dy2, dx, dy}) {
+    super({start_x, start_y});
+    this._dx1 = dx1;
+    this._dy1 = dy1;
+    this._dx2 = dx2;
+    this._dy2 = dy2;
+    this._dx = dx;
+    this._dy = dy;
+  }
+
+  get dx() {
+    return this._dx;
+  }
+
+  get dy() {
+    return this._dy;
+  }
+
+  get dx2() {
+    return this._dx2;
+  }
+
+  get dy2() {
+    return this._dy2;
+  }
+
+  set dx(new_dx) {
+    this._dx = new_dx;
+  }
+
+  set dy(new_dy) {
+    this._dy = new_dy;
+  }
+
+  set dx2(new_dx) {
+    this._dx2 = new_dx;
+  }
+
+  set dy2(new_dy) {
+    this._dy2 = new_dy;
+  }
+
+  render() {
+    return `s ${this._dx2} ${this._dy2} ${this._dx} ${this._dy}`;
+  }
+
+  getTerminal() {
+    return {
+      dx: this._dx,
+      dy: this._dy
+    };
+  }
+}
+
+export class Quadratic extends MovableElement {
+  constructor({start_x, start_y, dx1, dy1, dx, dy}) {
+    super({start_x, start_y});
+    this._dx1 = dx1;
+    this._dy1 = dy1;
+    this._dx = dx;
+    this._dy = dy;
+  }
+
+  get dx() {
+    return this._dx;
+  }
+
+  get dy() {
+    return this._dy;
+  }
+
+  get dx1() {
+    return this._dx1;
+  }
+
+  get dy1() {
+    return this._dy1;
+  }
+
+  set dx(new_dx) {
+    this._dx = new_dx;
+  }
+
+  set dy(new_dy) {
+    this._dy = new_dy;
+  }
+
+  set dx1(new_dx) {
+    this._dx1 = new_dx;
+  }
+
+  set dy1(new_dy) {
+    this._dy1 = new_dy;
+  }
+
+  render() {
+    return `q ${this._dx1} ${this._dy1} ${this._dx} ${this._dy}`;
+  }
+
+  getTerminal() {
+    return {
+      dx: this._dx,
+      dy: this._dy
+    };
+  }
+}
+
+export class SmoothQuadratic extends MovableElement {
+  constructor({start_x, start_y, dx, dy}) {
+    super({start_x, start_y});
+    this._dx = dx;
+    this._dy = dy;
+  }
+
+  get dx() {
+    return this._dx;
+  }
+
+  get dy() {
+    return this._dy;
+  }
+
+  set dx(new_dx) {
+    this._dx = new_dx;
+  }
+
+  set dy(new_dy) {
+    this._dy = new_dy;
+  }
+
+  render() {
+    return `t ${this._dx} ${this._dy}`;
+  }
+
+  getTerminal() {
+    return {
+      dx: this._dx,
+      dy: this._dy
+    };
+  }
+}
+
 
 export class ClosePath {
   render() {

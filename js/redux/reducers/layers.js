@@ -1,8 +1,11 @@
 import update from 'immutability-helper';
 import { LAYERS__ADD_LAYER, LAYERS__SELECT_LAYER, EDITOR__ADD_NEW_UNIT_PATH,
-         EDITOR__SELECT_UNIT_PATH, EDITOR__ADD_LINE, EDITOR__TOGGLE_ENCLOSURE,
-         EDITOR__REPOSITION_POINT, EDITOR__REPOSITION_UNIT_PATH, EDITOR__SET_LAYER_DIMENSIONS,
-         LAYERS__SET_STROKE_WIDTH, LAYERS__SET_STROKE, LAYERS__SET_FILL } from '../actions';
+         EDITOR__SELECT_UNIT_PATH, EDITOR__ADD_LINE, EDITOR__ADD_CUBIC, EDITOR__ADD_SMOOTH_CUBIC,
+         EDITOR__ADD_QUADRATIC, EDITOR__ADD_SMOOTH_QUADRATIC, EDITOR__TOGGLE_ENCLOSURE,
+         EDITOR__REPOSITION_POINT, EDITOR__REPOSITION_UNIT_PATH,
+         EDITOR__REPOSITION_FIRST_CONTROL_PT, EDITOR__REPOSITION_SECOND_CONTROL_PT,
+         EDITOR__SET_LAYER_DIMENSIONS, LAYERS__SET_STROKE_WIDTH, LAYERS__SET_STROKE,
+         LAYERS__SET_FILL } from '../actions';
 import { reducer } from '../../utils';
 import Layer from '../../core/Layer';
 
@@ -61,6 +64,42 @@ export default reducer(initial_state, {
       layer_objs: update_selected(state, selected)
     };
   },
+  EDITOR__ADD_CUBIC: (state, payload) => {
+    let selected = resolve_selected(state);
+    const {dx1, dy1, dx2, dy2, dx, dy} = payload;
+    selected.addCubic(dx1, dy1, dx2, dy2, dx, dy);
+    return {
+      ...state,
+      layer_objs: update_selected(state, selected)
+    };
+  },
+  EDITOR__ADD_SMOOTH_CUBIC: (state, payload) => {
+    let selected = resolve_selected(state);
+    const {dx2, dy2, dx, dy} = payload;
+    selected.addSmoothCubic(dx2, dy2, dx, dy);
+    return {
+      ...state,
+      layer_objs: update_selected(state, selected)
+    };
+  },
+  EDITOR__ADD_QUADRATIC: (state, payload) => {
+    let selected = resolve_selected(state);
+    const {dx1, dy1, dx, dy} = payload;
+    selected.addQuadratic(dx1, dy1, dx, dy);
+    return {
+      ...state,
+      layer_objs: update_selected(state, selected)
+    };
+  },
+  EDITOR__ADD_SMOOTH_QUADRATIC: (state, payload) => {
+    let selected = resolve_selected(state);
+    const {dx, dy} = payload;
+    selected.addSmoothQuadratic(dx, dy);
+    return {
+      ...state,
+      layer_objs: update_selected(state, selected)
+    };
+  },
   EDITOR__TOGGLE_ENCLOSURE: (state, payload) => {
     let selected = resolve_selected(state);
     selected.toggleEnclosure();
@@ -82,6 +121,24 @@ export default reducer(initial_state, {
     let selected = resolve_selected(state);
     const {dx, dy} = payload;
     selected.repositionUnitPath(dx, dy);
+    return {
+      ...state,
+      layer_objs: update_selected(state, selected)
+    };
+  },
+  EDITOR__REPOSITION_FIRST_CONTROL_PT: (state, payload) => {
+    let selected = resolve_selected(state);
+    const {dx, dy} = payload;
+    selected.repositionFirstControlPoint(dx, dy);
+    return {
+      ...state,
+      layer_objs: update_selected(state, selected)
+    };
+  },
+  EDITOR__REPOSITION_SECOND_CONTROL_PT: (state, payload) => {
+    let selected = resolve_selected(state);
+    const {dx, dy} = payload;
+    selected.repositionSecondControlPoint(dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)

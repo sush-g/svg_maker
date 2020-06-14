@@ -3,8 +3,12 @@
 [x] Unit path back forward, current unit path to edit.
 [x] Indicate the current path explicitly.
 [x] Reposition unit path at any point.
-[ ] Performance. (on adding 2nd layer). [on source-map enabled]
-[ ] Bézier curve (cubic and quadratic) support.
+[x] Bézier curve (cubic and quadratic) support.
 [ ] Highlight multiple layers in edit mode.
 [ ] Move layers up/down.
 [ ] Delete layers.
+[ ] Import export SVG
+[ ] Preview
+[ ] Style / CSS
+[ ] Push live
+[ ] Document README

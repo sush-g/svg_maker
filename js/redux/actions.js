@@ -8,9 +8,15 @@ export const EDITOR__SET_LAYER_DIMENSIONS = 'EDITOR__SET_LAYER_DIMENSIONS';
 export const EDITOR__ADD_NEW_UNIT_PATH = 'EDITOR__ADD_NEW_UNIT_PATH';
 export const EDITOR__SELECT_UNIT_PATH = 'EDITOR__SELECT_UNIT_PATH';
 export const EDITOR__ADD_LINE = 'EDITOR__ADD_LINE';
+export const EDITOR__ADD_CUBIC = 'EDITOR__ADD_CUBIC';
+export const EDITOR__ADD_SMOOTH_CUBIC = 'EDITOR__ADD_SMOOTH_CUBIC';
+export const EDITOR__ADD_QUADRATIC = 'EDITOR__ADD_QUADRATIC';
+export const EDITOR__ADD_SMOOTH_QUADRATIC = 'EDITOR__ADD_SMOOTH_QUADRATIC';
 export const EDITOR__TOGGLE_ENCLOSURE = 'EDITOR__TOGGLE_ENCLOSURE';
 export const EDITOR__REPOSITION_POINT = 'EDITOR__REPOSITION_POINT';
 export const EDITOR__REPOSITION_UNIT_PATH = 'EDITOR__REPOSITION_UNIT_PATH';
+export const EDITOR__REPOSITION_FIRST_CONTROL_PT = 'EDITOR__REPOSITION_FIRST_CONTROL_PT';
+export const EDITOR__REPOSITION_SECOND_CONTROL_PT = 'EDITOR__REPOSITION_SECOND_CONTROL_PT';
 export const EDITOR__DELETE_ELEMENT = 'EDITOR__DELETE_ELEMENT';
 
 export const LAYERS__ADD_LAYER = 'LAYERS__ADD_LAYER';
@@ -55,6 +61,36 @@ export const editor__add_line = (dx, dy) => ({
   payload: {dx: dx, dy: dy}
 });
 
+export const editor__add_cubic = (dx1, dy1, dx2, dy2, dx, dy) => ({
+  type: EDITOR__ADD_CUBIC,
+  payload: {
+    dx1: dx1, dy1: dy1,
+    dx2: dx2, dy2: dy2,
+    dx: dx, dy: dy
+  }
+});
+
+export const editor__add_smooth_cubic = (dx2, dy2, dx, dy) => ({
+  type: EDITOR__ADD_SMOOTH_CUBIC,
+  payload: {
+    dx2: dx2, dy2: dy2,
+    dx: dx, dy: dy
+  }
+});
+
+export const editor__add_quadratic = (dx1, dy1, dx, dy) => ({
+  type: EDITOR__ADD_QUADRATIC,
+  payload: {
+    dx1: dx1, dy1: dy1,
+    dx: dx, dy: dy
+  }
+});
+
+export const editor__add_smooth_quadratic = (dx, dy) => ({
+  type: EDITOR__ADD_SMOOTH_QUADRATIC,
+  payload: {dx: dx, dy: dy}
+});
+
 export const editor__toggle_enclosure = () => ({
   type: EDITOR__TOGGLE_ENCLOSURE,
   payload: null
@@ -72,6 +108,16 @@ export const editor__reposition_point = (dx, dy) => ({
 
 export const editor__reposition_unit_path = (dx, dy) => ({
   type: EDITOR__REPOSITION_UNIT_PATH,
+  payload: {dx: dx, dy: dy}
+});
+
+export const editor__reposition_first_control_pt = (dx, dy) => ({
+  type: EDITOR__REPOSITION_FIRST_CONTROL_PT,
+  payload: {dx: dx, dy: dy}
+});
+
+export const editor__reposition_second_control_pt = (dx, dy) => ({
+  type: EDITOR__REPOSITION_SECOND_CONTROL_PT,
   payload: {dx: dx, dy: dy}
 });
 
