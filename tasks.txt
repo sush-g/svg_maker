@@ -6,7 +6,7 @@
 [x] Bézier curve (cubic and quadratic) support.
 [x] Render guide for control pts.
 [x] Show element which is currently being edited.
-[*] Colors.
+[x] Colors.
 [ ] Highlight multiple layers in edit mode.
 [ ] Move layers up/down.
 [ ] Delete layers.
