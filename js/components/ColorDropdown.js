@@ -1,12 +1,23 @@
 import React, { Component } from "react";
-import { SwatchesPicker } from 'react-color';
+import { SketchPicker } from 'react-color';
 import PropTypes from 'prop-types';
+import { hex_to_rgb } from '../utils';
 
 
 class ColorDropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {closed: true};
+    this.wrapperRef = React.createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   handleInputboxClick() {
@@ -14,20 +25,35 @@ class ColorDropdown extends Component {
   }
 
   handleColorPick(color, e) {
-    this.setState(state => ({closed: true}), () => this.props.onColorPick(color, e));
+    this.props.onColorPick(color.hex, color.rgb.a, e);
+  }
+
+  handleClickOutside() {
+    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+      this.setState(state => ({closed: true}));
+    }
   }
 
   render() {
     const inputbox_styles = {
-      'background-color': this.props.color
+      'background-color': this.props.hex,
+      'opacity': this.props.alpha,
+      'width': '100%',
+      'height': '100%'
+    };
+    const rgba = {
+      ...hex_to_rgb(this.props.hex),
+      a: this.props.alpha
     };
     let dropdown_cls = `color-picker-wrapper`;
     dropdown_cls += this.state.closed ? ' closed': '';
     return (
-      <div className="color-dropdown-wrapper">
-        <div className="color-inputbox" style={inputbox_styles} onClick={this.handleInputboxClick.bind(this)}></div>
+      <div ref={this.wrapperRef} className="color-dropdown-wrapper">
+        <div className="color-inputbox" onClick={this.handleInputboxClick.bind(this)}>
+          <div style={inputbox_styles}></div>
+        </div>
         <div className={dropdown_cls}>
-          <SwatchesPicker color={this.props.color} onChange={this.handleColorPick.bind(this)}/>
+          <SketchPicker color={rgba} onChange={this.handleColorPick.bind(this)}/>
         </div>
       </div>
     );
@@ -35,7 +61,8 @@ class ColorDropdown extends Component {
 }
 
 ColorDropdown.propTypes = {
-  color: PropTypes.string,
+  hex: PropTypes.string,
+  alpha: PropTypes.number,
   onColorPick: PropTypes.func
 };
 

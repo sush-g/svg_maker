@@ -40,7 +40,6 @@ img {
 /* Color dropdown */
 .color-dropdown-wrapper {
   position: relative;
-  z-index: 10;
   display: inline-block;
 }
 
@@ -54,7 +53,7 @@ img {
 
 .color-picker-wrapper {
   position: absolute;
-  top: 30px;
+  top: 24px;
   z-index: 100;
 }
 

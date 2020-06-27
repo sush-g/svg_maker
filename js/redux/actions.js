@@ -136,13 +136,13 @@ export const layers__set_stroke_width = (idx, stroke_width) => ({
   payload: {idx: idx, stroke_width: stroke_width}
 });
 
-export const layers__set_stroke = (idx, hex) => ({
+export const layers__set_stroke = (idx, hex, alpha) => ({
   type: LAYERS__SET_STROKE,
-  payload: {idx: idx, hex: hex}
+  payload: {idx: idx, hex: hex, alpha: alpha}
 });
 
-export const layers__set_fill = (idx, hex) => ({
+export const layers__set_fill = (idx, hex, alpha) => ({
   type: LAYERS__SET_FILL,
-  payload: {idx: idx, hex: hex}
+  payload: {idx: idx, hex: hex, alpha: alpha}
 });
 

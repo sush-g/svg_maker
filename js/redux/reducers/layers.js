@@ -163,6 +163,7 @@ export default reducer(initial_state, {
   LAYERS__SET_STROKE: (state, payload) => {
     let layer_obj = state.layer_objs[payload.idx];
     layer_obj.stroke = payload.hex;
+    layer_obj.stroke_opacity = payload.alpha;
     return {
       ...state,
       layer_objs: update(state.layer_objs, {$splice: [[payload.idx, 1, layer_obj]]})
@@ -171,6 +172,7 @@ export default reducer(initial_state, {
   LAYERS__SET_FILL: (state, payload) => {
     let layer_obj = state.layer_objs[payload.idx];
     layer_obj.fill = payload.hex;
+    layer_obj.fill_opacity = payload.alpha;
     return {
       ...state,
       layer_objs: update(state.layer_objs, {$splice: [[payload.idx, 1, layer_obj]]})

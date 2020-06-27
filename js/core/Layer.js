@@ -4,11 +4,14 @@ import UnitPath from './UnitPath';
 import { safe_mod } from '../utils';
 
 export default class Layer {
-  constructor(fill='transparent', stroke='#000', stroke_width=1,
-              stroke_linecap=SVG_STROKE_LINECAP.round) {
+  constructor(fill='#000', stroke='#000', stroke_width=1,
+              stroke_linecap=SVG_STROKE_LINECAP.round,
+              fill_opacity=0, stroke_opacity=1) {
     this._unit_paths = [];
     this._fill = fill;
+    this._fill_opacity = fill_opacity;
     this._stroke = stroke;
+    this._stroke_opacity = stroke_opacity;
     this._stroke_width = stroke_width;
     this._stroke_linecap = stroke_linecap;
     this._selected_unit_path_idx = -1;
@@ -23,8 +26,16 @@ export default class Layer {
     return this._stroke;
   }
 
+  get stroke_opacity() {
+    return this._stroke_opacity;
+  }
+
   get fill() {
     return this._fill;
+  }
+
+  get fill_opacity() {
+    return this._fill_opacity;
   }
 
   set stroke_width(new_width) {
@@ -37,6 +48,14 @@ export default class Layer {
 
   set fill(new_hex) {
     this._fill = new_hex;
+  }
+
+  set stroke_opacity(new_opacity) {
+    this._stroke_opacity = new_opacity;
+  }
+
+  set fill_opacity(new_opacity) {
+    this._fill_opacity = new_opacity;
   }
 
   get stroke_linecap() {
@@ -132,8 +151,9 @@ export default class Layer {
 
   getPathCode() {
     let d = this._unit_paths.map(unit_path => unit_path.render()).join(' ');
-    return <path d={d} fill={this._fill} stroke={this._stroke}
-                       strokeWidth={this._stroke_width} strokeLinecap={this._stroke_linecap} />;
+    return <path d={d} fill={this._fill} stroke={this._stroke} strokeOpacity={this._stroke_opacity}
+                       fillOpacity={this._fill_opacity} strokeWidth={this._stroke_width}
+                       strokeLinecap={this._stroke_linecap} />;
   }
 
   getGuideCode() {

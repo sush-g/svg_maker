@@ -21,12 +21,12 @@ class LayersPane extends Component {
     this.props.layers__set_stroke_width(idx, val);
   }
 
-  handleStrokeInput(layer_obj, idx, color, e) {
-    this.props.layers__set_stroke(idx, color.hex);
+  handleStrokeInput(layer_obj, idx, hex, alpha, e) {
+    this.props.layers__set_stroke(idx, hex, alpha);
   }
 
-  handleFillInput(layer_obj, idx, color, e) {
-    this.props.layers__set_fill(idx, color.hex);
+  handleFillInput(layer_obj, idx, hex, alpha, e) {
+    this.props.layers__set_fill(idx, hex, alpha);
   }
 
   renderLayerControl(layer_obj, idx) {
@@ -37,10 +37,12 @@ class LayersPane extends Component {
           <input type="text" value={layer_obj.stroke_width} onChange={this.handleStrokeWidthInput.bind(this,layer_obj,idx)} />
         </label>
         <label class="formfield-label">Stroke:
-          <ColorDropdown color={layer_obj.stroke} onColorPick={this.handleStrokeInput.bind(this, layer_obj, idx)} />
+          <ColorDropdown hex={layer_obj.stroke} alpha={layer_obj.stroke_opacity}
+                         onColorPick={this.handleStrokeInput.bind(this, layer_obj, idx)} />
         </label>
         <label class="formfield-label">Fill:
-          <ColorDropdown color={layer_obj.fill} onColorPick={this.handleFillInput.bind(this, layer_obj, idx)} />
+          <ColorDropdown hex={layer_obj.fill} alpha={layer_obj.fill_opacity}
+                         onColorPick={this.handleFillInput.bind(this, layer_obj, idx)} />
         </label>
       </div>
     );
