@@ -7,9 +7,10 @@
 [x] Render guide for control pts.
 [x] Show element which is currently being edited.
 [x] Colors.
-[ ] Highlight multiple layers in edit mode.
+[*] Layer sets.
 [ ] Move layers up/down.
 [ ] Delete layers.
+[ ] Highlight multiple layers in edit mode.
 [ ] Import export SVG
 [ ] Preview
 [ ] Style / CSS

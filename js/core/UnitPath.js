@@ -6,7 +6,8 @@ import { MovableElement, MoveTo, Line, Cubic, SmoothCubic, Quadratic, SmoothQuad
 const PIN_COLOR = "rgba(0,0,0,0.5)";
 
 export default class UnitPath {
-  constructor() {
+  constructor(layer) {
+    this._layer = layer;
     this._elements = [];
     this._starting_cursor = null;
     this._rel_cursor = {x: 0, y: 0};
@@ -164,12 +165,19 @@ export default class UnitPath {
     this._enclosed = false;
   }
 
+  toggleEnclosure() {
+    this.enclosed ? this.openPath() : this.closePath();
+  }
+
   deleteElement() {
     const to_delete = this._elements[this._elements.length-1];
     if (to_delete) {
       const {dx, dy} = to_delete.getTerminal();
       this._updateRelCursor({dx: -dx, dy: -dy});
       this._elements.pop();
+    }
+    if (!this.hasElements()) {
+      this._layer.deleteUnitPath(this);
     }
   }
 

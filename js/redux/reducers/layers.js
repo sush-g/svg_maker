@@ -58,7 +58,7 @@ export default reducer(initial_state, {
   EDITOR__ADD_LINE: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx, dy} = payload;
-    selected.addLine(dx, dy);
+    selected.selected_unit_path.addLine(dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -67,7 +67,7 @@ export default reducer(initial_state, {
   EDITOR__ADD_CUBIC: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx1, dy1, dx2, dy2, dx, dy} = payload;
-    selected.addCubic(dx1, dy1, dx2, dy2, dx, dy);
+    selected.selected_unit_path.addCubic(dx1, dy1, dx2, dy2, dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -76,7 +76,7 @@ export default reducer(initial_state, {
   EDITOR__ADD_SMOOTH_CUBIC: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx2, dy2, dx, dy} = payload;
-    selected.addSmoothCubic(dx2, dy2, dx, dy);
+    selected.selected_unit_path.addSmoothCubic(dx2, dy2, dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -85,7 +85,7 @@ export default reducer(initial_state, {
   EDITOR__ADD_QUADRATIC: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx1, dy1, dx, dy} = payload;
-    selected.addQuadratic(dx1, dy1, dx, dy);
+    selected.selected_unit_path.addQuadratic(dx1, dy1, dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -94,7 +94,7 @@ export default reducer(initial_state, {
   EDITOR__ADD_SMOOTH_QUADRATIC: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx, dy} = payload;
-    selected.addSmoothQuadratic(dx, dy);
+    selected.selected_unit_path.addSmoothQuadratic(dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -102,7 +102,7 @@ export default reducer(initial_state, {
   },
   EDITOR__TOGGLE_ENCLOSURE: (state, payload) => {
     let selected = resolve_selected(state);
-    selected.toggleEnclosure();
+    selected.selected_unit_path.toggleEnclosure();
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -111,7 +111,7 @@ export default reducer(initial_state, {
   EDITOR__REPOSITION_POINT: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx, dy} = payload;
-    selected.repositionTail(dx, dy);
+    selected.selected_unit_path.repositionTail(dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -120,7 +120,7 @@ export default reducer(initial_state, {
   EDITOR__REPOSITION_UNIT_PATH: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx, dy} = payload;
-    selected.repositionUnitPath(dx, dy);
+    selected.selected_unit_path.reposition(dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -129,7 +129,7 @@ export default reducer(initial_state, {
   EDITOR__REPOSITION_FIRST_CONTROL_PT: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx, dy} = payload;
-    selected.repositionFirstControlPoint(dx, dy);
+    selected.selected_unit_path.repositionFirstControlPoint(dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -138,7 +138,7 @@ export default reducer(initial_state, {
   EDITOR__REPOSITION_SECOND_CONTROL_PT: (state, payload) => {
     let selected = resolve_selected(state);
     const {dx, dy} = payload;
-    selected.repositionSecondControlPoint(dx, dy);
+    selected.selected_unit_path.repositionSecondControlPoint(dx, dy);
     return {
       ...state,
       layer_objs: update_selected(state, selected)
@@ -146,7 +146,7 @@ export default reducer(initial_state, {
   },
   EDITOR__DELETE_ELEMENT: (state, payload) => {
     let selected = resolve_selected(state);
-    selected.deleteElement();
+    selected.selected_unit_path.deleteElement();
     return {
       ...state,
       layer_objs: update_selected(state, selected)
