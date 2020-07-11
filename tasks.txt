@@ -10,9 +10,14 @@
 [*] Layer sets.
 [ ] Move layers up/down.
 [ ] Delete layers.
+[ ] Bug - control point keyboard code (no shift) not behaving properly.
+[ ] Import export SVG.
+[ ] Preview.
+[ ] Style / CSS.
+[ ] Push live.
+[ ] Document README.
+
+--
+
+To evaluate
 [ ] Highlight multiple layers in edit mode.
-[ ] Import export SVG
-[ ] Preview
-[ ] Style / CSS
-[ ] Push live
-[ ] Document README

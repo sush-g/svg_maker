@@ -8,7 +8,7 @@ import { editor__set_layer_dimensions, editor__add_new_unit_path, editor__select
          editor__add_smooth_quadratic, editor__toggle_enclosure, editor__reposition_point,
          editor__reposition_unit_path, editor__reposition_first_control_pt,
          editor__reposition_second_control_pt, editor__delete_element } from '../redux/actions';
-import Layer from '../core/Layer';
+import LayerSet from '../core/Layer';
 
 hotkeys_configure({
   ignoreRepeatedEventsWhenKeyHeldDown: false
@@ -200,22 +200,22 @@ class EditingCanvas extends Component {
       height: height,
       border: width ? '1px solid #000': '0'
     };
-    const selected_layer_obj = this.props.layer_objs[this.props.selected_layer_obj_idx];
+    const layer_to_edit = this.props.layer_set.layer_to_edit;
 
     return (
       <HotKeys className="hotkeys" keyMap={this._keyMap} handlers={this._keyHandlers}>
         <div className="editing-canvas-wrapper">
           <div className="status-bar">
-            {selected_layer_obj ? selected_layer_obj.getLastElementRenderCode(): null}
+            {layer_to_edit ? layer_to_edit.getLastElementRenderCode(): null}
           </div>
           <div className="editing-canvas">
             <div className="ref-img-wrapper" style={ref_img_styles}>
               <img src={this.props.ref_img_src} onLoad={this.handleImgLoad.bind(this)}/>
             </div>
             <div className="layer-wrapper" style={layer_styles}>
-              {selected_layer_obj ? wrap_svg([
-                selected_layer_obj.getPathCode(),
-                selected_layer_obj.getGuideCode()
+              {layer_to_edit ? wrap_svg([
+                layer_to_edit.getPathCode(),
+                layer_to_edit.getGuideCode()
               ], width, height): null}
             </div>
           </div>
@@ -228,16 +228,14 @@ class EditingCanvas extends Component {
 EditingCanvas.propTypes = {
   ref_img_src: PropTypes.string,
   ref_img_opacity: PropTypes.string,
-  layer_objs: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
-  selected_layer_obj_idx: PropTypes.number,
+  layer_set: PropTypes.instanceOf(LayerSet),
   layer_dimensions: PropTypes.object
 };
 
 const mapStateToProps = (state, props) => ({
   ref_img_src: state.controls.ref_img_src,
   ref_img_opacity: state.controls.ref_img_opacity,
-  layer_objs: state.layers.layer_objs,
-  selected_layer_obj_idx: state.layers.selected_layer_obj_idx,
+  layer_set: state.layers.layer_set,
   layer_dimensions: state.editor.layer_dimensions
 });
 

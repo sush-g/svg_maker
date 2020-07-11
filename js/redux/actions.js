@@ -20,6 +20,7 @@ export const EDITOR__REPOSITION_SECOND_CONTROL_PT = 'EDITOR__REPOSITION_SECOND_C
 export const EDITOR__DELETE_ELEMENT = 'EDITOR__DELETE_ELEMENT';
 
 export const LAYERS__ADD_LAYER = 'LAYERS__ADD_LAYER';
+export const LAYERS__DELETE_LAYER = 'LAYERS__DELETE_LAYER';
 export const LAYERS__SELECT_LAYER = 'LAYERS__SELECT_LAYER';
 export const LAYERS__SET_STROKE_WIDTH = 'LAYERS__SET_STROKE_WIDTH';
 export const LAYERS__SET_STROKE = 'LAYERS__SET_STROKE';
@@ -126,6 +127,11 @@ export const layers__add_layer = () => ({
   payload: null
 });
 
+export const layers__delete_layer = idx => ({
+  type: LAYERS__DELETE_LAYER,
+  payload: idx
+});
+
 export const layers__select_layer = idx => ({
   type: LAYERS__SELECT_LAYER,
   payload: idx
@@ -145,4 +151,3 @@ export const layers__set_fill = (idx, hex, alpha) => ({
   type: LAYERS__SET_FILL,
   payload: {idx: idx, hex: hex, alpha: alpha}
 });
-
