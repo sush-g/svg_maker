@@ -7,9 +7,9 @@
 [x] Render guide for control pts.
 [x] Show element which is currently being edited.
 [x] Colors.
-[*] Layer sets.
+[x] Layer sets.
+[x] Delete layers.
 [ ] Move layers up/down.
-[ ] Delete layers.
 [ ] Bug - control point keyboard code (no shift) not behaving properly.
 [ ] Import export SVG.
 [ ] Preview.
