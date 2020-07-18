@@ -187,6 +187,7 @@ class EditingCanvas extends Component {
   }
 
   handleImgLoad(event) {
+    console.log(event.target.width, event.target.height);
     this.props.editor__set_layer_dimensions(event.target.width, event.target.height);
   }
 

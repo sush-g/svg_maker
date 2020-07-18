@@ -10,9 +10,9 @@
 [x] Layer sets.
 [x] Delete layers.
 [x] Move layers up/down.
+[x] Preview.
 [ ] Bug - control point keyboard code (no shift) not behaving properly.
 [ ] Import export SVG.
-[ ] Preview.
 [ ] Style / CSS.
 [ ] Push live.
 [ ] Document README.
