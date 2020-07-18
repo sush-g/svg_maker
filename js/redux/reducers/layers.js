@@ -6,7 +6,7 @@ import { LAYERS__ADD_LAYER, LAYERS__DELETE_LAYER, LAYERS__SELECT_LAYER, EDITOR__
          EDITOR__REPOSITION_POINT, EDITOR__REPOSITION_UNIT_PATH,
          EDITOR__REPOSITION_FIRST_CONTROL_PT, EDITOR__REPOSITION_SECOND_CONTROL_PT,
          EDITOR__SET_LAYER_DIMENSIONS, EDITOR__DELETE_ELEMENT, LAYERS__SET_STROKE_WIDTH,
-         LAYERS__SET_STROKE, LAYERS__SET_FILL } from '../actions';
+         LAYERS__SET_STROKE, LAYERS__SET_FILL, LAYERS__REPOSITION_LAYER } from '../actions';
 import { reducer } from '../../utils';
 import Layer from '../../core/Layer';
 import LayerSet from '../../core/LayerSet';
@@ -122,6 +122,10 @@ export default reducer(initial_state, {
     const layer = state.layer_set.layers[payload.idx];
     layer.fill = payload.hex;
     layer.fill_opacity = payload.alpha;
+    return updateLayerSet(state);
+  },
+  [LAYERS__REPOSITION_LAYER]: (state, payload) => {
+    state.layer_set.repositionLayer(payload.source_idx, payload.target_idx);
     return updateLayerSet(state);
   }
 });

@@ -9,7 +9,7 @@
 [x] Colors.
 [x] Layer sets.
 [x] Delete layers.
-[ ] Move layers up/down.
+[x] Move layers up/down.
 [ ] Bug - control point keyboard code (no shift) not behaving properly.
 [ ] Import export SVG.
 [ ] Preview.

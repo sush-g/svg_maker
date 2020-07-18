@@ -25,6 +25,7 @@ export const LAYERS__SELECT_LAYER = 'LAYERS__SELECT_LAYER';
 export const LAYERS__SET_STROKE_WIDTH = 'LAYERS__SET_STROKE_WIDTH';
 export const LAYERS__SET_STROKE = 'LAYERS__SET_STROKE';
 export const LAYERS__SET_FILL = 'LAYERS__SET_FILL';
+export const LAYERS__REPOSITION_LAYER = 'LAYERS__REPOSITION_LAYER';
 
 
 export const controls__set_mode = mode => ({
@@ -150,4 +151,9 @@ export const layers__set_stroke = (idx, hex, alpha) => ({
 export const layers__set_fill = (idx, hex, alpha) => ({
   type: LAYERS__SET_FILL,
   payload: {idx: idx, hex: hex, alpha: alpha}
+});
+
+export const layers__reposition_layer = (source_idx, target_idx) => ({
+  type: LAYERS__REPOSITION_LAYER,
+  payload: {source_idx: source_idx, target_idx: target_idx}
 });

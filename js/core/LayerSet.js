@@ -36,7 +36,14 @@ export default class LayerSet {
     }
   }
 
-  positionLayer() {
-
+  repositionLayer(source_idx, target_idx) {
+    const safe_source_idx = safe_mod(source_idx, this._layers.length);
+    const safe_target_idx = safe_mod(target_idx, this._layers.length);
+    const layer = this._layers[safe_source_idx];
+    this._layers.splice(safe_source_idx, 1);
+    this._layers.splice(safe_target_idx, 0, layer);
+    if (this._layer_idx_to_edit === safe_source_idx) {
+      this.layer_idx_to_edit = safe_target_idx;
+    }
   }
 }
