@@ -5,8 +5,8 @@ export const APP__SET_SUB_APP = 'APP__SET_SUB_APP';
 export const CANVAS__SET_MODE = 'CANVAS__SET_MODE';
 export const CANVAS__SET_REF_IMAGE = 'CANVAS__SET_REF_IMAGE';
 export const CANVAS__SET_REF_IMAGE_OPACITY = 'CANVAS__SET_REF_IMAGE_OPACITY';
+export const CANVAS__SET_DIMENSIONS = 'CANVAS__SET_DIMENSIONS';
 
-export const EDITOR__SET_LAYER_DIMENSIONS = 'EDITOR__SET_LAYER_DIMENSIONS';
 export const EDITOR__ADD_NEW_UNIT_PATH = 'EDITOR__ADD_NEW_UNIT_PATH';
 export const EDITOR__SELECT_UNIT_PATH = 'EDITOR__SELECT_UNIT_PATH';
 export const EDITOR__ADD_LINE = 'EDITOR__ADD_LINE';
@@ -50,8 +50,8 @@ export const canvas__set_ref_image_opacity = ref_img_opacity => ({
   payload: ref_img_opacity
 });
 
-export const editor__set_layer_dimensions = (width, height) => ({
-  type: EDITOR__SET_LAYER_DIMENSIONS,
+export const canvas__set_dimensions = (width, height) => ({
+  type: CANVAS__SET_DIMENSIONS,
   payload: {width: width, height: height}
 });
 

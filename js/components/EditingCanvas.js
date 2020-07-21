@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { HotKeys, configure as hotkeys_configure } from "react-hotkeys";
 import { to_opacity_float, wrap_svg } from "../utils";
-import { editor__set_layer_dimensions, editor__add_new_unit_path, editor__select_unit_path,
+import { canvas__set_dimensions, editor__add_new_unit_path, editor__select_unit_path,
          editor__add_line,  editor__add_cubic, editor__add_smooth_cubic, editor__add_quadratic,
          editor__add_smooth_quadratic, editor__toggle_enclosure, editor__reposition_point,
          editor__reposition_unit_path, editor__reposition_first_control_pt,
@@ -187,15 +187,14 @@ class EditingCanvas extends Component {
   }
 
   handleImgLoad(event) {
-    console.log(event.target.width, event.target.height);
-    this.props.editor__set_layer_dimensions(event.target.width, event.target.height);
+    this.props.canvas__set_dimensions(event.target.width, event.target.height);
   }
 
   render() {
     const ref_img_styles = {
       opacity: to_opacity_float(this.props.ref_img_opacity)
     };
-    const {width, height} = this.props.layer_dimensions;
+    const {width, height} = this.props.canvas_dimensions;
     const layer_styles = {
       width: width,
       height: height,
@@ -230,18 +229,18 @@ EditingCanvas.propTypes = {
   ref_img_src: PropTypes.string,
   ref_img_opacity: PropTypes.string,
   layer_set: PropTypes.instanceOf(LayerSet),
-  layer_dimensions: PropTypes.object
+  canvas_dimensions: PropTypes.object
 };
 
 const mapStateToProps = (state, props) => ({
   ref_img_src: state.canvas.ref_img_src,
   ref_img_opacity: state.canvas.ref_img_opacity,
   layer_set: state.layers.layer_set,
-  layer_dimensions: state.editor.layer_dimensions
+  canvas_dimensions: state.canvas.dimensions
 });
 
 const mapDispatchToProps = {
-  editor__set_layer_dimensions,
+  canvas__set_dimensions,
   editor__reposition_point,
   editor__reposition_unit_path,
   editor__reposition_first_control_pt,

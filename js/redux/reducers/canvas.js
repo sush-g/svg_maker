@@ -1,11 +1,16 @@
 import { CANVAS_MODES } from '../../constants';
-import {CANVAS__SET_MODE, CANVAS__SET_REF_IMAGE, CANVAS__SET_REF_IMAGE_OPACITY} from '../actions';
+import { CANVAS__SET_MODE, CANVAS__SET_REF_IMAGE, CANVAS__SET_REF_IMAGE_OPACITY,
+         CANVAS__SET_DIMENSIONS } from '../actions';
 import { reducer } from '../../utils';
 
 const initial_state = {
   mode: CANVAS_MODES.edit,
   ref_img_src: 'http://2.bp.blogspot.com/-duG2Fz2J_58/UyC8h0nR7vI/AAAAAAAAOjI/o9NgcHHGShg/s1600/kraft_paper_texture_texturise.jpg',
-  ref_img_opacity: 0.5
+  ref_img_opacity: 0.5,
+  dimensions: {
+    width: 0,
+    height: 0
+  }
 };
 
 export default reducer(initial_state, {
@@ -25,6 +30,16 @@ export default reducer(initial_state, {
     return {
       ...state,
       ref_img_opacity: payload
+    };
+  },
+  [CANVAS__SET_DIMENSIONS]: (state, payload) => {
+    const {width, height} = payload;
+    return {
+      ...state,
+      dimensions: {
+        width: width,
+        height: height
+      }
     };
   }
 });

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 class PreviewingCanvas extends Component {
   render() {
-    const {width, height} = this.props.layer_dimensions;
+    const {width, height} = this.props.canvas_dimensions;
 
     return (
       <div className="previewing-canvas">
@@ -15,7 +15,7 @@ class PreviewingCanvas extends Component {
 
 const mapStateToProps = (state, props) => ({
   layer_set: state.layers.layer_set,
-  layer_dimensions: state.editor.layer_dimensions
+  canvas_dimensions: state.canvas.dimensions
 });
 
 const mapDispatchToProps = {
