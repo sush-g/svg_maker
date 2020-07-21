@@ -1,6 +1,11 @@
 import keyMirror from 'keymirror';
 
-export const MODES = keyMirror({
+export const SUB_APPS = keyMirror({
+  import: null,
+  canvas: null
+});
+
+export const CANVAS_MODES = keyMirror({
   edit: null,
   preview: null
 });

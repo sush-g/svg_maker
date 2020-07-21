@@ -234,8 +234,8 @@ EditingCanvas.propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  ref_img_src: state.controls.ref_img_src,
-  ref_img_opacity: state.controls.ref_img_opacity,
+  ref_img_src: state.canvas.ref_img_src,
+  ref_img_opacity: state.canvas.ref_img_opacity,
   layer_set: state.layers.layer_set,
   layer_dimensions: state.editor.layer_dimensions
 });

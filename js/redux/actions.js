@@ -1,8 +1,10 @@
 import keyMirror from 'keymirror';
 
-export const CONTROLS__SET_MODE = 'CONTROLS__SET_MODE';
-export const CONTROLS__SET_REF_IMAGE = 'CONTROLS__SET_REF_IMAGE';
-export const CONTROLS__SET_REF_IMAGE_OPACITY = 'CONTROLS__SET_REF_IMAGE_OPACITY';
+export const APP__SET_SUB_APP = 'APP__SET_SUB_APP';
+
+export const CANVAS__SET_MODE = 'CANVAS__SET_MODE';
+export const CANVAS__SET_REF_IMAGE = 'CANVAS__SET_REF_IMAGE';
+export const CANVAS__SET_REF_IMAGE_OPACITY = 'CANVAS__SET_REF_IMAGE_OPACITY';
 
 export const EDITOR__SET_LAYER_DIMENSIONS = 'EDITOR__SET_LAYER_DIMENSIONS';
 export const EDITOR__ADD_NEW_UNIT_PATH = 'EDITOR__ADD_NEW_UNIT_PATH';
@@ -28,18 +30,23 @@ export const LAYERS__SET_FILL = 'LAYERS__SET_FILL';
 export const LAYERS__REPOSITION_LAYER = 'LAYERS__REPOSITION_LAYER';
 
 
-export const controls__set_mode = mode => ({
-  type: CONTROLS__SET_MODE,
+export const app__set_sub_app = sub_app => ({
+  type: APP__SET_SUB_APP,
+  payload: sub_app
+});
+
+export const canvas__set_mode = mode => ({
+  type: CANVAS__SET_MODE,
   payload: mode
 });
 
-export const controls__set_ref_image = ref_img_src => ({
-  type: CONTROLS__SET_REF_IMAGE,
+export const canvas__set_ref_image = ref_img_src => ({
+  type: CANVAS__SET_REF_IMAGE,
   payload: ref_img_src
 });
 
-export const controls__set_ref_image_opacity = ref_img_opacity => ({
-  type: CONTROLS__SET_REF_IMAGE_OPACITY,
+export const canvas__set_ref_image_opacity = ref_img_opacity => ({
+  type: CANVAS__SET_REF_IMAGE_OPACITY,
   payload: ref_img_opacity
 });
 

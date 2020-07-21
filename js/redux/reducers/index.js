@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import controls from './controls';
+import app from './app';
+import canvas from './canvas';
 import layers from './layers';
 import editor from './editor';
 
-export default combineReducers({ controls, editor, layers });
+export default combineReducers({app, canvas, editor, layers });
