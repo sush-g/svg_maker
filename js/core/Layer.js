@@ -40,6 +40,10 @@ export default class Layer {
     return this._fill_opacity;
   }
 
+  get stroke_linecap() {
+    return this._stroke_linecap;
+  }
+
   set stroke_width(new_width) {
     this._stroke_width = new_width;
   }
@@ -60,8 +64,8 @@ export default class Layer {
     this._fill_opacity = new_opacity;
   }
 
-  get stroke_linecap() {
-    return this._stroke_linecap;
+  set stroke_linecap(new_linecap) {
+    this._stroke_linecap = new_linecap;
   }
 
   get selected_unit_path() {
@@ -98,8 +102,20 @@ export default class Layer {
     return selected_unit_path && selected_unit_path.getLastElementRenderCode();
   }
 
+  _getDrawingString() {
+    return this._unit_paths.map(unit_path => unit_path.render()).join(' ');
+  }
+
+  getPathString() {
+    const d = this._getDrawingString();
+    return [`<path d="${d}" fill="${this._fill}" stroke="${this._stroke}"`,
+            `stroke-opacity="${this._stroke_opacity}" fill-opacity="${this._fill_opacity}"`,
+            `stroke-width="${this._stroke_width}" stroke-linecap="${this._stroke_linecap}" />`
+    ].join(' ');
+  }
+
   getPathCode() {
-    let d = this._unit_paths.map(unit_path => unit_path.render()).join(' ');
+    const d = this._getDrawingString();
     return <path d={d} fill={this._fill} stroke={this._stroke} strokeOpacity={this._stroke_opacity}
                        fillOpacity={this._fill_opacity} strokeWidth={this._stroke_width}
                        strokeLinecap={this._stroke_linecap} />;

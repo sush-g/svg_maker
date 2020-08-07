@@ -1,6 +1,6 @@
 import Layer from './Layer';
 import { safe_mod } from '../utils';
-import { wrap_svg } from "../utils";
+import { wrap_svg, wrap_svg_string } from "../utils";
 
 export default class LayerSet {
   constructor() {
@@ -51,6 +51,13 @@ export default class LayerSet {
   getSVG(width, height) {
     return wrap_svg(
       this.layers.map(l => l.getPathCode()),
+      width, height
+    );
+  }
+
+  getSVGString(width, height) {
+    return wrap_svg_string(
+      this.layers.map(l => l.getPathString()).join(''),
       width, height
     );
   }

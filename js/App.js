@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import { SUB_APPS } from './constants';
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
+import history from './history';
+import Nav from './components/Nav';
 import Canvas from './components/Canvas';
+import ImportSVG from './components/ImportSVG';
+import ExportSVG from './components/ExportSVG';
 
 class App extends Component {
   handleImport(e) {
@@ -14,21 +18,32 @@ class App extends Component {
   }
 
   render() {
-    const sub_app_to_render = this.props.sub_app_to_render;
-    if (sub_app_to_render === SUB_APPS.import) {
-      return <div>Import sub app</div>;
-    } else if (sub_app_to_render === SUB_APPS.canvas) {
-      return <Canvas/>;
-    }
+    return (
+      <HashRouter history={history}>
+        <Nav/>
+        <Switch>
+          <Route exact path="/import">
+            <ImportSVG/>
+          </Route>
+          <Route exact path="/export">
+            <ExportSVG/>
+          </Route>
+          <Route exact path="/canvas">
+            <Canvas/>
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/canvas" />
+          </Route>
+        </Switch>
+      </HashRouter>
+    );
   }
 }
 
 App.propTypes = {
-  sub_app_to_render: PropTypes.string
 }
 
 const mapStateToProps = (state, props) => ({
-  sub_app_to_render: state.app.sub_app_to_render
 });
 
 export default connect(mapStateToProps)(App);

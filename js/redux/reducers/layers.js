@@ -6,7 +6,7 @@ import { LAYERS__ADD_LAYER, LAYERS__DELETE_LAYER, LAYERS__SELECT_LAYER, EDITOR__
          EDITOR__REPOSITION_POINT, EDITOR__REPOSITION_UNIT_PATH,
          EDITOR__REPOSITION_FIRST_CONTROL_PT, EDITOR__REPOSITION_SECOND_CONTROL_PT,
          EDITOR__DELETE_ELEMENT, LAYERS__SET_STROKE_WIDTH, LAYERS__SET_STROKE, LAYERS__SET_FILL,
-         LAYERS__REPOSITION_LAYER } from '../actions';
+         LAYERS__REPOSITION_LAYER, LAYERS__IMPORT } from '../actions';
 import { reducer } from '../../utils';
 import Layer from '../../core/Layer';
 import LayerSet from '../../core/LayerSet';
@@ -21,6 +21,12 @@ const updateLayerSet = (state) => {
 };
 
 export default reducer(initial_state, {
+  [LAYERS__IMPORT]: (state, payload) => {
+    return {
+      ...state,
+      layer_set: payload
+    };
+  },
   [LAYERS__ADD_LAYER]: (state, payload) => {
     state.layer_set.addNewLayer();
     return updateLayerSet(state);

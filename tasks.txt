@@ -13,9 +13,15 @@
 [x] Preview.
 [ ] Bug - control point keyboard code (no shift) not behaving properly.
 [ ] Import export SVG.
+[ ] Move back and forth b/w unit path elements.
 [ ] Style / CSS.
+[ ] Legend - Telling what shortcuts do what.
 [ ] Push live.
 [ ] Document README.
+[ ] Transformations: Rotations, scaling, √ translating
+[ ] Copy paste unit drawings.
+[ ] Save drawings - library of drawings.
+[ ] Ruler.
 
 --
 

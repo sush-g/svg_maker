@@ -22,6 +22,10 @@ export const wrap_svg = (svg_inner_jsx, width=100, height=100) => {
   return (<svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>{svg_inner_jsx}</svg>);
 };
 
+export const wrap_svg_string = (svg_inner_str, width=100, height=100) => {
+  return `<svg width="100%" height="100%" viewBox="0 0 ${width} ${height}">${svg_inner_str}</svg>`;
+};
+
 export const hex_to_rgb = (hex) => {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result ? {

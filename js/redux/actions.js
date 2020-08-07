@@ -1,6 +1,8 @@
 import keyMirror from 'keymirror';
+import SVGImporter from '../core/SVGImporter';
+import history from '../history';
 
-export const APP__SET_SUB_APP = 'APP__SET_SUB_APP';
+export const IMPORT__TRIGGER_IMPORT = 'IMPORT__TRIGGER_IMPORT';
 
 export const CANVAS__SET_MODE = 'CANVAS__SET_MODE';
 export const CANVAS__SET_REF_IMAGE = 'CANVAS__SET_REF_IMAGE';
@@ -21,6 +23,7 @@ export const EDITOR__REPOSITION_FIRST_CONTROL_PT = 'EDITOR__REPOSITION_FIRST_CON
 export const EDITOR__REPOSITION_SECOND_CONTROL_PT = 'EDITOR__REPOSITION_SECOND_CONTROL_PT';
 export const EDITOR__DELETE_ELEMENT = 'EDITOR__DELETE_ELEMENT';
 
+export const LAYERS__IMPORT = 'LAYERS__IMPORT';
 export const LAYERS__ADD_LAYER = 'LAYERS__ADD_LAYER';
 export const LAYERS__DELETE_LAYER = 'LAYERS__DELETE_LAYER';
 export const LAYERS__SELECT_LAYER = 'LAYERS__SELECT_LAYER';
@@ -30,10 +33,16 @@ export const LAYERS__SET_FILL = 'LAYERS__SET_FILL';
 export const LAYERS__REPOSITION_LAYER = 'LAYERS__REPOSITION_LAYER';
 
 
-export const app__set_sub_app = sub_app => ({
-  type: APP__SET_SUB_APP,
-  payload: sub_app
-});
+export const import__trigger_import = (dispatch, svg_code) => {
+  const importer = new SVGImporter(svg_code);
+  const new_layer_set = importer.getLayerSet();
+  dispatch(layers__import(new_layer_set));
+  history.push('#/canvas');
+  return {
+    type: IMPORT__TRIGGER_IMPORT,
+    payload: svg_code
+  };
+};
 
 export const canvas__set_mode = mode => ({
   type: CANVAS__SET_MODE,
@@ -128,6 +137,11 @@ export const editor__reposition_first_control_pt = (dx, dy) => ({
 export const editor__reposition_second_control_pt = (dx, dy) => ({
   type: EDITOR__REPOSITION_SECOND_CONTROL_PT,
   payload: {dx: dx, dy: dy}
+});
+
+export const layers__import = (new_layer_set) => ({
+  type: LAYERS__IMPORT,
+  payload: new_layer_set
 });
 
 export const layers__add_layer = () => ({

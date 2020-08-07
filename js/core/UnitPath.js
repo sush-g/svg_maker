@@ -190,6 +190,35 @@ export default class UnitPath {
     }
   }
 
+  // Used for SVG Import service
+  execDrawCmd(cmd) {
+    switch(cmd.code) {
+      case 'M':
+        this.starting_cursor = {x: cmd.x, y: cmd.y};
+        break;
+      case 'c':
+        this.addCubic(cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y);
+        break;
+      case 's':
+        this.addSmoothCubic(cmd.x2, cmd.y2, cmd.x, cmd.y);
+        break;
+      case 'q':
+        this.addQuadratic(cmd.x1, cmd.y1, cmd.x, cmd.y);
+        break;
+      case 't':
+        this.addSmoothQuadratic(cmd.x, cmd.y);
+        break;
+      case 'l':
+        this.addLine(cmd.x, cmd.y);
+        break;
+      case 'z':
+        this.closePath();
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     let elements = [this._moveTo(), ...this._elements];
     if (this._enclosed) {

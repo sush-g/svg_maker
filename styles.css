@@ -2,6 +2,20 @@ img {
   max-width: 100%;
 }
 
+.nav a {
+  margin: 0 5px;
+}
+.nav a:first-child {
+  margin-left: 0;
+}
+.nav a:last-child {
+  margin-right: 0;
+}
+.nav a.selected {
+  color: black;
+  font-weight: bold;
+}
+
 .editing-canvas-wrapper {
   position: relative;
   max-width: 1000px;

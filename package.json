@@ -29,6 +29,9 @@
     "react-dom": "^16.13.1",
     "react-hotkeys": "^2.0.0",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5"
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "svg-parser": "^2.0.4",
+    "svg-path-parser": "^1.1.0"
   }
 }
