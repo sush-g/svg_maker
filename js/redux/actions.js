@@ -37,7 +37,7 @@ export const import__trigger_import = (dispatch, svg_code) => {
   const importer = new SVGImporter(svg_code);
   const new_layer_set = importer.getLayerSet();
   dispatch(layers__import(new_layer_set));
-  history.push('#/canvas');
+  history.push('/canvas');
   return {
     type: IMPORT__TRIGGER_IMPORT,
     payload: svg_code

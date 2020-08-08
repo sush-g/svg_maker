@@ -20,7 +20,7 @@ export default class SVGImporter {
       if (curr.type === "element" && curr.tagName === "path") {
         paths.push(curr);
       }
-      curr.children.forEach((child, idx) => {
+      curr.children && curr.children.forEach((child, idx) => {
         q.push(child);
       });
     }
