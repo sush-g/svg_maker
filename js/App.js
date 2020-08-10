@@ -5,6 +5,7 @@ import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import history from './history';
 import Nav from './components/Nav';
 import Canvas from './components/Canvas';
+import PreviewingCanvas from './components/PreviewingCanvas';
 import ImportSVG from './components/ImportSVG';
 import ExportSVG from './components/ExportSVG';
 
@@ -30,6 +31,9 @@ class App extends Component {
           </Route>
           <Route exact path="/canvas">
             <Canvas/>
+          </Route>
+          <Route exact path="/canvas/preview">
+            <PreviewingCanvas/>
           </Route>
           <Route exact path="/">
             <Redirect to="/canvas" />

@@ -186,7 +186,7 @@ export default class UnitPath {
     if (last_element) {
       const abs_start_x = this._starting_cursor.x+last_element.start_x;
       const abs_start_y = this._starting_cursor.y+last_element.start_y;
-      return `[${abs_start_x}, ${abs_start_y}] ${last_element.render()}`;
+      return `${last_element.constructor.ReadableName} [${abs_start_x}, ${abs_start_y}] ${last_element.render()}`;
     }
   }
 

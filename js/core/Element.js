@@ -28,6 +28,10 @@ export class MoveTo extends MovableElement {
   render() {
     return `M ${this._start_x} ${this._start_y}`;
   }
+
+  static get ReadableName() {
+    return 'Move to';
+  }
 }
 
 export class Line extends MovableElement {
@@ -62,6 +66,10 @@ export class Line extends MovableElement {
       dx: this._dx,
       dy: this._dy
     };
+  }
+
+  static get ReadableName() {
+    return 'Line';
   }
 }
 
@@ -134,6 +142,10 @@ export class Cubic extends MovableElement {
       dy: this._dy
     };
   }
+
+  static get ReadableName() {
+    return 'Cubic';
+  }
 }
 
 export class SmoothCubic extends MovableElement {
@@ -189,6 +201,10 @@ export class SmoothCubic extends MovableElement {
       dy: this._dy
     };
   }
+
+  static get ReadableName() {
+    return 'Smooth Cubic';
+  }
 }
 
 export class Quadratic extends MovableElement {
@@ -242,6 +258,10 @@ export class Quadratic extends MovableElement {
       dy: this._dy
     };
   }
+
+  static get ReadableName() {
+    return 'Quadratic';
+  }
 }
 
 export class SmoothQuadratic extends MovableElement {
@@ -276,6 +296,10 @@ export class SmoothQuadratic extends MovableElement {
       dx: this._dx,
       dy: this._dy
     };
+  }
+
+  static get ReadableName() {
+    return 'Smooth Quadratic';
   }
 }
 

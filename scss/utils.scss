@@ -1,0 +1,20 @@
+/* Color dropdown */
+.color-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+  .color-inputbox {
+    border: 1px solid #000;
+    width: 32px;
+    height: 16px;
+    margin: 0 4px;
+    display: inline-block;
+  }
+  .color-picker-wrapper {
+    position: absolute;
+    top: 24px;
+    z-index: 100;
+    &.closed {
+      display: none;
+    }
+  }
+}

@@ -4,7 +4,6 @@ import history from '../history';
 
 export const IMPORT__TRIGGER_IMPORT = 'IMPORT__TRIGGER_IMPORT';
 
-export const CANVAS__SET_MODE = 'CANVAS__SET_MODE';
 export const CANVAS__SET_REF_IMAGE = 'CANVAS__SET_REF_IMAGE';
 export const CANVAS__SET_REF_IMAGE_OPACITY = 'CANVAS__SET_REF_IMAGE_OPACITY';
 export const CANVAS__SET_DIMENSIONS = 'CANVAS__SET_DIMENSIONS';
@@ -43,11 +42,6 @@ export const import__trigger_import = (dispatch, svg_code) => {
     payload: svg_code
   };
 };
-
-export const canvas__set_mode = mode => ({
-  type: CANVAS__SET_MODE,
-  payload: mode
-});
 
 export const canvas__set_ref_image = ref_img_src => ({
   type: CANVAS__SET_REF_IMAGE,

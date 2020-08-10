@@ -1,0 +1,24 @@
+.canvas {
+  .hotkeys {
+    outline: none;
+  }
+
+  .editing-canvas-wrapper {
+    position: relative;
+    max-width: 1000px;
+    z-index: 1;
+  }
+
+  .editing-canvas {
+    position: relative;
+    width: 1000px;
+    .ref-img-wrapper {
+      position: absolute;
+      z-index: 1;
+    }
+    .layer-wrapper {
+      position: absolute;
+      z-index: 10;
+    }
+  }
+}

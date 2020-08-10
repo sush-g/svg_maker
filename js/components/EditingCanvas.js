@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import { HotKeys, configure as hotkeys_configure } from "react-hotkeys";
 import { to_opacity_float, wrap_svg } from "../utils";
 import { canvas__set_dimensions, editor__add_new_unit_path, editor__select_unit_path,
@@ -205,6 +206,9 @@ class EditingCanvas extends Component {
     return (
       <HotKeys className="hotkeys" keyMap={this._keyMap} handlers={this._keyHandlers}>
         <div className="editing-canvas-wrapper">
+          <div className="mode-switcher">
+            <Link to="/canvas/preview">Preview</Link>
+          </div>
           <div className="status-bar">
             {layer_to_edit ? layer_to_edit.getLastElementRenderCode(): null}
           </div>

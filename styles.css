@@ -1,3 +1,9 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
 img {
   max-width: 100%;
 }
@@ -19,6 +25,7 @@ img {
 .editing-canvas-wrapper {
   position: relative;
   max-width: 1000px;
+  z-index: 1;
 }
 
 .editing-canvas-wrapper .status-bar {
@@ -42,12 +49,7 @@ img {
   z-index: 10;
 }
 
-.primary-zone {
-  position: relative;
-  z-index: 1;
-}
-
-.primary-zone .hotkeys {
+.hotkeys {
   outline: none;
 }
 

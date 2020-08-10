@@ -50,21 +50,21 @@ class LayersPane extends Component {
   renderLayerControl(layer_obj, idx) {
     return (
       <div key={`layer-obj-${idx}`}>
-        <a class="formfield-link" href="#" onClick={this.handleMoveUp.bind(this, idx)}>&#x25B2;</a>
-        <a class="formfield-link" href="#" onClick={this.handleMoveDown.bind(this, idx)}>&#x25BC;</a>
-        <span class="layer-label" onClick={this.handleSelectLayer.bind(this, idx)}>Layer {idx}</span>
-        <label class="formfield-label">Stroke width:
+        <a className="formfield-link" href="#" onClick={this.handleMoveUp.bind(this, idx)} title="Move up">&#x25B2;</a>
+        <a className="formfield-link" href="#" onClick={this.handleMoveDown.bind(this, idx)} title="Move down">&#x25BC;</a>
+        <span className="layer-label" onClick={this.handleSelectLayer.bind(this, idx)}>Layer {idx}</span>
+        <label className="formfield-label">Stroke width:
           <input type="text" value={layer_obj.stroke_width} onChange={this.handleStrokeWidthInput.bind(this,layer_obj,idx)} />
         </label>
-        <label class="formfield-label">Stroke:
+        <label className="formfield-label">Stroke:
           <ColorDropdown hex={layer_obj.stroke} alpha={layer_obj.stroke_opacity}
                          onColorPick={this.handleStrokeInput.bind(this, layer_obj, idx)} />
         </label>
-        <label class="formfield-label">Fill:
+        <label className="formfield-label">Fill:
           <ColorDropdown hex={layer_obj.fill} alpha={layer_obj.fill_opacity}
                          onColorPick={this.handleFillInput.bind(this, layer_obj, idx)} />
         </label>
-        <a class="formfield-link" href="#" onClick={this.handleDelete.bind(this, idx)}>&times;</a>
+        <a className="formfield-link" href="#" onClick={this.handleDelete.bind(this, idx)}>&times;</a>
       </div>
     );
   }
@@ -76,8 +76,9 @@ class LayersPane extends Component {
     );
     return (
       <div className="layers-pane">
-        <a href="#" onClick={this.handleAddLayer.bind(this)}>Add layer</a>
+        <h4>Layers</h4>
         <div className="layer-objs">{layers_jsx}</div>
+        <a href="#" onClick={this.handleAddLayer.bind(this)}>Add layer</a>
       </div>
     );
   }
